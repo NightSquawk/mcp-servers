@@ -9,7 +9,6 @@ Open-source [Model Context Protocol](https://modelcontextprotocol.io) servers by
 | [proxmox-mcp-server](https://github.com/NightSquawk/proxmox-mcp-server) | Proxmox VE + Proxmox Datacenter Manager | Catalog |
 | [appfolio-mcp-server](https://github.com/NightSquawk/appfolio-mcp-server) | AppFolio Property Manager (Reports + Database APIs) | Catalog |
 | [invoiceninja-mcp-server](https://github.com/NightSquawk/invoiceninja-mcp-server) | Invoice Ninja v5 | Catalog |
-| [everything-mcp-server](https://github.com/NightSquawk/everything-mcp-server) | Everything (voidtools) local file search | Catalog |
 | [tacticalrmm-mcp-server](https://github.com/NightSquawk/tacticalrmm-mcp-server) | TacticalRMM | Curated tools |
 | [kimai-mcp-server](https://github.com/NightSquawk/kimai-mcp-server) | Kimai time tracking | Curated tools |
 | [gohighlevel-mcp-server](https://github.com/NightSquawk/gohighlevel-mcp-server) | GoHighLevel CRM | Curated tools |
