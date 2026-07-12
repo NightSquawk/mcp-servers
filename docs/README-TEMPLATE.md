@@ -16,6 +16,7 @@
 
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name={{SERVER_KEY}}&config={{CURSOR_B64}})
 [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Server-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name={{SERVER_KEY}}&config={{VSCODE_URLENC}})
+[![Download for Claude Desktop](https://img.shields.io/badge/Claude_Desktop-Download_.mcpb-D97757?style=flat-square)](https://github.com/NightSquawk/{{REPO}}/releases/download/mcpb-v{{VERSION}}/{{REPO}}-{{VERSION}}.mcpb)
 
 An MCP (Model Context Protocol) server for **{{PRODUCT}}**, connecting {{WHAT_IT_CONNECTS_TO}} to Claude Desktop, Claude Code, Cursor, and any MCP client. {{HEADLINE_NUMBER_SENTENCE, e.g. "Covers all 993 API endpoints behind 6 catalog-backed tools."}} {{DIFFERENTIATOR_SENTENCE, e.g. "Reads execute by default; writes are blocked unless explicitly enabled."}}
 
@@ -60,7 +61,9 @@ Or in `.mcp.json` at your project root:
 
 ### Claude Desktop
 
-Same JSON block in `claude_desktop_config.json` (Settings > Developer > Edit Config).
+One-click: [download the `.mcpb` extension](https://github.com/NightSquawk/{{REPO}}/releases/download/mcpb-v{{VERSION}}/{{REPO}}-{{VERSION}}.mcpb) and double-click it. Claude Desktop prompts for the settings above, no JSON editing.
+
+Or the same JSON block in `claude_desktop_config.json` (Settings > Developer > Edit Config).
 
 ### Cursor
 
