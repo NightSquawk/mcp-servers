@@ -1,6 +1,8 @@
 # {{PRODUCT}} MCP Server
 
 <!-- Copy everything below the divider into the server repo's README.md and replace {{PLACEHOLDERS}}. Rules and section rationale: README-STANDARD.md -->
+<!-- {{CURSOR_B64}} = base64 of {"command":"npx","args":["-y","@nightsquawktech/{{REPO}}"],"env":{...all vars...}} -->
+<!-- {{VSCODE_URLENC}} = URL-encoded {"command":"npx","args":["-y","@nightsquawktech/{{REPO}}"],"env":{...all vars...}} -->
 
 ---
 
@@ -12,21 +14,31 @@
 [![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue)](https://github.com/NightSquawk/{{REPO}}/blob/v1.0.0/LICENSE)
 [![Node](https://img.shields.io/node/v/@nightsquawktech/{{REPO}})](https://nodejs.org)
 
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name={{SERVER_KEY}}&config={{CURSOR_B64}})
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Server-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name={{SERVER_KEY}}&config={{VSCODE_URLENC}})
+
 An MCP (Model Context Protocol) server for **{{PRODUCT}}**, connecting {{WHAT_IT_CONNECTS_TO}} to Claude Desktop, Claude Code, Cursor, and any MCP client. {{HEADLINE_NUMBER_SENTENCE, e.g. "Covers all 993 API endpoints behind 6 catalog-backed tools."}} {{DIFFERENTIATOR_SENTENCE, e.g. "Reads execute by default; writes are blocked unless explicitly enabled."}}
 
 - {{QUANTIFIED_FEATURE_1}}
 - {{QUANTIFIED_FEATURE_2}}
 - {{QUANTIFIED_FEATURE_3}}
-- **Read-only by default**: writes require {{WRITE_GATE_ENV}} plus per-call confirmation
+- **Read-only by default**: writes require `{{WRITE_GATE_ENV}}` plus per-call confirmation
 - Runs over stdio via `npx`, no install step
 
 ## Quick start
 
-Add the block below to your MCP client config. The JSON is identical for every client; only the file location differs.
+The config below lists **every** environment variable the server reads, with recommended values. Delete the optional ones you do not need. The JSON is identical for every client; only the file location differs.
 
 ### Claude Code
 
-`.mcp.json` in your project root:
+```bash
+claude mcp add {{SERVER_KEY}} \
+  --env {{ENV_VAR_1}}={{RECOMMENDED_VALUE}} \
+  --env {{ENV_VAR_2}}={{RECOMMENDED_VALUE}} \
+  -- npx -y @nightsquawktech/{{REPO}}
+```
+
+Or in `.mcp.json` at your project root:
 
 ```json
 {
@@ -35,8 +47,11 @@ Add the block below to your MCP client config. The JSON is identical for every c
       "command": "npx",
       "args": ["-y", "@nightsquawktech/{{REPO}}"],
       "env": {
-        "{{ENV_VAR_1}}": "{{EXAMPLE_VALUE}}",
-        "{{ENV_VAR_2}}": "{{EXAMPLE_VALUE}}"
+        "{{ENV_VAR_1}}": "{{RECOMMENDED_VALUE}}",
+        "{{ENV_VAR_2}}": "{{RECOMMENDED_VALUE}}",
+        "{{OPTIONAL_ENV_VAR_1}}": "{{RECOMMENDED_VALUE}}",
+        "{{OPTIONAL_ENV_VAR_2}}": "{{RECOMMENDED_VALUE}}",
+        "{{WRITE_GATE_ENV}}": "false"
       }
     }
   }
@@ -45,11 +60,13 @@ Add the block below to your MCP client config. The JSON is identical for every c
 
 ### Claude Desktop
 
-Same block in `claude_desktop_config.json` (Settings > Developer > Edit Config).
+Same JSON block in `claude_desktop_config.json` (Settings > Developer > Edit Config).
 
 ### Cursor
 
-Same block in `.cursor/mcp.json`.
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name={{SERVER_KEY}}&config={{CURSOR_B64}})
+
+Or the same JSON block in `.cursor/mcp.json`.
 
 ## Tools
 
@@ -67,6 +84,8 @@ Same block in `.cursor/mcp.json`.
 |---|---|---|---|
 | `{{ENV_VAR_1}}` | yes | | {{PURPOSE}} |
 | `{{ENV_VAR_2}}` | yes | | {{PURPOSE}} |
+| `{{OPTIONAL_ENV_VAR_1}}` | no | `{{DEFAULT}}` | {{PURPOSE}} |
+| `{{OPTIONAL_ENV_VAR_2}}` | no | `{{DEFAULT}}` | {{PURPOSE}} |
 | `{{WRITE_GATE_ENV}}` | no | `false` | Enables write operations |
 
 ## Security & write safety
@@ -77,38 +96,49 @@ Same block in `.cursor/mcp.json`.
 - Destructive operations additionally require `confirm: true` on the individual call.
 - {{ANY_OTHER_GUARDRAIL, e.g. backups before mutation, rate limits}}
 
-## How it works
+## API coverage
 
-{{ARCHITECTURE_PARAGRAPH: catalog generation, schema source, determinism. 3-6 sentences, link out for depth.}}
+<!-- GENERATED SECTION: do not edit by hand. Regenerate from the catalog with scripts/generate-api-coverage.mjs whenever the catalog changes. -->
 
-Shared runtime: [`@nightsquawktech/mcp-core`](https://github.com/NightSquawk/mcp-core).
+{{TOTAL_COUNT}} operations covered.
 
-## Example prompts
+| Category | Operations |
+|---|---|
+| {{CATEGORY_1}} | {{COUNT}} |
+| {{CATEGORY_2}} | {{COUNT}} |
 
-- "{{REALISTIC_PROMPT_1}}"
-- "{{REALISTIC_PROMPT_2}}"
-- "{{REALISTIC_PROMPT_3}}"
+<details>
+<summary><strong>{{CATEGORY_1}}</strong> ({{COUNT}} operations)</summary>
 
-## Development
+| Method | Path | Operation ID |
+|---|---|---|
+| GET | `{{/path/one}}` | `{{operation_id}}` |
+| POST | `{{/path/two}}` | `{{operation_id}}` |
 
-```bash
-git clone https://github.com/NightSquawk/{{REPO}}.git
-cd {{REPO}}
-npm install
-npm run build
-```
+</details>
 
-{{CATALOG_REGEN_INSTRUCTIONS_IF_APPLICABLE}}
+<details>
+<summary><strong>{{CATEGORY_2}}</strong> ({{COUNT}} operations)</summary>
 
-Branches: `v1.0.0` is the stable default branch; all work lands on `develop` first. PRs target `develop`.
+| Method | Path | Operation ID |
+|---|---|---|
+| GET | `{{/path/three}}` | `{{operation_id}}` |
 
-## Related servers
+</details>
 
-Part of the [NightSquawk MCP server family](https://github.com/NightSquawk/mcp-servers): [{{SIBLING_1}}](https://github.com/NightSquawk/{{SIBLING_1}}), [{{SIBLING_2}}](https://github.com/NightSquawk/{{SIBLING_2}}), and more.
+<!-- Report-catalog servers (e.g. AppFolio): use Report | ID columns instead. -->
+
+## Contributing
+
+Contributions and issues are welcome. Please open an issue first before submitting a PR.
 
 ## License
 
 AGPL-3.0: free for personal and open-source use. Organizations that cannot comply with the AGPL can purchase a commercial license, and hosted/managed versions are available. See [COMMERCIAL.md](https://github.com/NightSquawk/{{REPO}}/blob/v1.0.0/COMMERCIAL.md) or contact hello@nightsquawk.tech.
+
+### Copyright
+
+For copyright concerns or takedown requests, contact hello@nightsquawk.tech.
 
 ---
 
