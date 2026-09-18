@@ -6,7 +6,7 @@ Open-source [Model Context Protocol](https://modelcontextprotocol.io) servers by
 
 | Server | Connects to | What you can do |
 |---|---|---|
-| [proxmox-mcp-server](https://github.com/NightSquawk/proxmox-mcp-server) | Proxmox VE + Proxmox Datacenter Manager | Query and manage nodes, VMs, containers, storage, and cluster config across the full PVE and PDM APIs (675+ endpoints). Writes are env-gated. |
+| [proxmox-mcp-server](https://github.com/NightSquawk/proxmox-mcp-server) | Proxmox VE + Proxmox Datacenter Manager | Query and manage nodes, VMs, containers, storage, and cluster config across the full PVE and PDM APIs (993 endpoints: 675 PVE + 318 PDM). Writes are env-gated. |
 | [tacticalrmm-mcp-server](https://github.com/NightSquawk/tacticalrmm-mcp-server) | TacticalRMM | Read agents, checks, alerts, tasks, software, updates, and audit logs from a self-hosted TacticalRMM instance. |
 | [kimai-mcp-server](https://github.com/NightSquawk/kimai-mcp-server) | Kimai | Browse customers, projects, activities, and timesheets; create and manage time entries with confirmation-guarded writes. |
 | [gohighlevel-mcp-server](https://github.com/NightSquawk/gohighlevel-mcp-server) | GoHighLevel CRM | Full custom-field CRUD, contacts (including delete), opportunities, tags, conversations, and calendars. Fills the gaps the official GHL MCP leaves open. |
@@ -37,7 +37,7 @@ Every repo's README documents its required environment variables and setup.
 
 ## Design notes
 
-Several servers use a catalog design: instead of registering dozens of tools, they expose three (`list_endpoints`, `describe_endpoint`, `call_endpoint`) over a generated JSON catalog of the target API. The model discovers operations on demand, which keeps the standing context cost per server tiny when many MCP servers are loaded at once. Write operations are always gated behind explicit confirmation.
+Several servers use a catalog design: instead of registering dozens of tools, they expose a small list/describe/call tool triad (e.g. `list_endpoints`, `describe_endpoint`, `call_endpoint`; some servers duplicate the triad per sub-API or report catalog) over a generated JSON catalog of the target API. The model discovers operations on demand, which keeps the standing context cost per server tiny when many MCP servers are loaded at once. Write operations are always gated behind explicit confirmation.
 
 Shared plumbing lives in [`@nightsquawktech/mcp-core`](https://github.com/NightSquawk/mcp-core).
 
